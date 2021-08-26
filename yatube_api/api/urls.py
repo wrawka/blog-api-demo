@@ -5,7 +5,6 @@ from rest_framework.routers import DefaultRouter
 
 from .views import CommentViewSet, FollowViewSet, GroupViewSet, PostViewSet
 
-
 router = DefaultRouter()
 router.register('follow', FollowViewSet, basename='follow')
 router.register('groups', GroupViewSet)

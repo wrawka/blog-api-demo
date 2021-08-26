@@ -19,7 +19,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
     group = models.ForeignKey("Group", on_delete=models.SET_NULL, blank=True,
-                      related_name="posts", null=True)
+                              related_name="posts", null=True)
     image = models.ImageField(
         upload_to='posts/', null=True, blank=True)
 
@@ -41,7 +41,7 @@ class Follow(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              related_name='user')
     following = models.ForeignKey(User, on_delete=models.CASCADE,
-                               related_name='following')
+                                  related_name='following')
 
     class Meta:
         constraints = [
@@ -52,4 +52,3 @@ class Follow(models.Model):
 
     def __str__(self) -> str:
         return f'{self.user} >> {self.following}'
-
