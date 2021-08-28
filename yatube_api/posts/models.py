@@ -6,7 +6,7 @@ User = get_user_model()
 
 class Group(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=50, unique=True)
     description = models.TextField()
 
     def __str__(self):
@@ -45,9 +45,12 @@ class Follow(models.Model):
 
     class Meta:
         constraints = [
+            models.CheckConstraint(
+                check=~models.Q(following=models.F('user')),
+                name='self_following_disallowed'
+            ),
             models.UniqueConstraint(
                 fields=['following', 'user'], name='unique_following'),
-
         ]
 
     def __str__(self) -> str:
